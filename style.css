@@ -1,0 +1,65 @@
+#Logo {
+  display: block;
+    text-align: center;
+    height: 200px;
+}
+.klasa {
+  background-color: blue;
+  padding: 30px;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 80%;
+  margin-left: 7.5%;
+}
+.klasa:hover {
+  background-color: #1DB954;
+  transform: scale(1.05);
+}
+
+.klasa:active {
+  transform: scale(0.95);
+}
+#StronaGlowna {
+    padding: 20px;
+    text-align: center;
+}
+#Wyszukaj {
+    float:left;
+}
+.ukryty {
+    display:none;
+}
+.widok {
+  transition: opacity 0.3s ease-in-out;
+  text-align: center;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color:cornflowerblue;
+}
+.przycisk-powrot {
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: none;
+  background-color: #333333;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+
+.przycisk-powrot:hover {
+  background-color: #1DB954;
+  transform: scale(1.05);
+}
+
+.przycisk-powrot:active {
+  transform: scale(0.95);
+}

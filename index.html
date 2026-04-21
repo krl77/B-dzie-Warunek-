@@ -1,32 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+    <title>TOP TIER TRACKING</title>
 </head>
+
 <body>
     <div id="StronaGlowna" class="glowna">
-        <div id="Logo">Tutaj miejsce na logo</div>
-        <div id="kontener">
-        <div id="menu">
-            <div id="KafelekWyszukaj" class="klasa">Wyszukaj</div>
-            <div id="KafelekRanking" class="klasa">Ranking</div>
-            <div id="KafelekNowosci" class="klasa">Nowosci</div>
-            <div id="KafelekUlubione" class="klasa">Ulubione</div>
+        <div class="sidebar">
+            <div id="Logo">Tutaj miejsce na logo</div>
+            <div id="kontener">
+                <div id="menu">
+                    <div id="KafelekWyszukaj" class="klasa">Wyszukaj</div>
+                    <div id="KafelekRanking" class="klasa">Ranking</div>
+                    <div id="KafelekNowosci" class="klasa">Nowosci</div>
+                    <div id="KafelekUlubione" class="klasa">Ulubione</div>
+                </div>
+            </div>
         </div>
-        <div id="Wyszukaj" class ="widok ukryty">
-        <button class="przycisk-powrot">Wróć do menu</button>
-        <form>
-            <label for="Wyszukaj">Wyszukaj:</label>
-            <input type="text" id="szukanie">
-        </form>
-        </div>
-        <div id="RankingSwiat" class="widok ">
-            <h2>Ranking TOP 50 Piosenek worldwide</h2>
-            <p>Tutaj znajdziesz ranking.</p>
-            <table>
+        <div class="glowna-tresc">
+            <div id="Wyszukaj" class="widok ukryty">
+                <div class="wyszukiwarka-kontener">
+                    <h2>Co chcesz wyszukać?</h2>
+
+                    <form id="formularz-wyszukiwania">
+                        <input type="text" id="szukanie" placeholder="Wpisz nazwę artysty lub utworu..."
+                            autocomplete="off">
+                        <button type="submit" id="przycisk-szukaj">Szukaj</button>
+                    </form>
+                </div>
+
+                <div id="wyniki-wyszukiwania" class="wyniki-grid">
+                </div>
+                <div class="kontener-powrotu">
+                    <button class="przycisk-powrot">Wróć</button>
+                </div>
+            </div>
+            <div id="GlownyRankingSwiat" class="widok ukryty">
+                <h2>Ranking TOP 50 Piosenek worldwide</h2>
+                <p>Tutaj znajdziesz ranking.</p>
+                <table>
                     <thead>
                         <tr>
                             <th>Pozycja</th>
@@ -54,68 +71,305 @@
                             <td>Tatuazyk</td>
                             <td>Sentino</td>
                         </tr>
-                            <tr>
+                        <tr>
                             <td>4</td>
                             <td><img src="okladka3.jpg" alt="Okładka 4"></td>
                             <td>Pistolet</td>
                             <td>Sentino</td>
                         </tr>
-                            <tr>
+                        <tr>
                             <td>5</td>
                             <td><img src="okladka3.jpg" alt="Okładka 5"></td>
                             <td>Pare Kulek</td>
                             <td>Sentino</td>
                         </tr>
-                    </tbody>
-            </table>
-        </div>
-        <div id="RankingPolska" class="widok">
-            <h2>Ranking TOP 50 Piosenek w Polsce</h2>
-            <p>Tutaj znajdziesz ranking.</p>
-            <table>
-                    <thead>
                         <tr>
-                            <th>Pozycja</th>
-                            <th>Okładka</th>
-                            <th>Tytuł</th>
-                            <th>Artysta</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td><img src="okladka1.jpg" alt="Okładka 1"></td>
-                            <td>Babydoll</td>
-                            <td>Dominic Fike</td>
+                            <td>6</td>
+                            <td><img src="okladka1.jpg" alt="Okladka 6"></td>
+                            <td>Beauty And A Beat</td>
+                            <td>Justin Bieber, Nicki Minaj</td>
                         </tr>
                         <tr>
-                            <td>2</td>
-                            <td><img src="okladka2.jpg" alt="Okładka 2"></td>
-                            <td>Risk it All</td>
-                            <td>Bruno Mars</td>
+                            <td>7</td>
+                            <td><img src="okladka2.jpg" alt="Okladka 6"></td>
+                            <td>SWIM</td>
+                            <td>BTS</td>
                         </tr>
                         <tr>
-                            <td>3</td>
-                            <td><img src="okladka3.jpg" alt="Okładka 3"></td>
-                            <td>Tatuazyk</td>
-                            <td>Sentino</td>
+                            <td>8</td>
+                            <td><img src="okladka3.jpg" alt="Okladka 6"></td>
+                            <td>drop dead</td>
+                            <td>Olivia Rodrigo</td>
                         </tr>
-                            <tr>
-                            <td>4</td>
-                            <td><img src="okladka3.jpg" alt="Okładka 4"></td>
-                            <td>Pistolet</td>
-                            <td>Sentino</td>
+                        <tr>
+                            <td>9</td>
+                            <td><img src="okladka1.jpg" alt="Okladka 6"></td>
+                            <td>Baby</td>
+                            <td>Justin Bieber</td>
                         </tr>
-                            <tr>
-                            <td>5</td>
-                            <td><img src="okladka3.jpg" alt="Okładka 5"></td>
-                            <td>Pare Kulek</td>
-                            <td>Sentino</td>
+                        <tr>
+                            <td>10</td>
+                            <td><img src="okladka3.jpg" alt="Okladka 6"></td>
+                            <td>DtMF</td>
+                            <td>Bad Bunny</td>
                         </tr>
                     </tbody>
-            </table>
+                </table>
+                <div class="kontener-powrotu">
+                    <button class="przycisk-powrot">Wróć</button>
+                </div>
+            </div>
+            <div id="Nowosci" class="widok ukryty">
+                <h2>Gorące Nowości</h2>
+                <div class="nowosci-karuzela">
+                    <div class="kafelek-utworu">
+                        <img src="okladka1.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki 1</h4>
+                        <p>Artysta 1</p>
+                    </div>
+                    <div class="kafelek-utworu">
+                        <img src="okladka2.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki 2</h4>
+                        <p>Artysta 2</p>
+                    </div>
+                    <div class="kafelek-utworu">
+                        <img src="okladka3.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki 3</h4>
+                        <p>Artysta 3</p>
+                    </div>
+                    <div class="kafelek-utworu">
+                        <img src="okladka1.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki 1</h4>
+                        <p>Artysta 1</p>
+                    </div>
+                    <div class="kafelek-utworu">
+                        <img src="okladka2.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki 2</h4>
+                        <p>Artysta 2</p>
+                    </div>
+                    <div class="kafelek-utworu">
+                        <img src="okladka3.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki 3</h4>
+                        <p>Artysta 3</p>
+                    </div>
+                    <div class="kafelek-utworu">
+                        <img src="okladka1.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki 1</h4>
+                        <p>Artysta 1</p>
+                    </div>
+                    <div class="kafelek-utworu">
+                        <img src="okladka2.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki 2</h4>
+                        <p>Artysta 2</p>
+                    </div>
+                    <div class="kafelek-utworu">
+                        <img src="okladka3.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki 3</h4>
+                        <p>Artysta 3</p>
+                    </div>
+                     <div class="kafelek-utworu">
+                        <img src="okladka3.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki 3</h4>
+                        <p>Artysta 3</p>
+                    </div>
+                    <div class="kafelek-utworu">
+                        <img src="okladka1.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki 1</h4>
+                        <p>Artysta 1</p>
+                    </div>
+                    <div class="kafelek-utworu">
+                        <img src="okladka2.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki 2</h4>
+                        <p>Artysta 2</p>
+                    </div>
+                    <div class="kafelek-utworu">
+                        <img src="okladka3.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki 3</h4>
+                        <p>Artysta 3</p>
+                    </div>
+                     <div class="kafelek-utworu">
+                        <img src="okladka3.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki 3</h4>
+                        <p>Artysta 3</p>
+                    </div>
+                    <div class="kafelek-utworu">
+                        <img src="okladka1.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki 1</h4>
+                        <p>Artysta 1</p>
+                    </div>
+                    <div class="kafelek-utworu">
+                        <img src="okladka2.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki 2</h4>
+                        <p>Artysta 2</p>
+                    </div>
+                    <div class="kafelek-utworu">
+                        <img src="okladka3.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki 3</h4>
+                        <p>Artysta 3</p>
+                    </div>
+                </div>
+                <div class="kontener-powrotu">
+                    <button class="przycisk-powrot">Wróć</button>
+                </div>
+            </div>
+            <div id="Ulubione" class="widok ukryty">
+                <h2>Twoje Ulubione</h2>
+                <div class="ulubione-grid">
+                    <div class="kafelek-utworu">
+                        <img src="okladka1.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki</h4>
+                        <p>Artysta</p>
+                    </div>
+                    <div class="kafelek-utworu">
+                        <img src="okladka2.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki</h4>
+                        <p>Artysta</p>
+                    </div>
+                    <div class="kafelek-utworu">
+                        <img src="okladka3.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki</h4>
+                        <p>Artysta</p>
+                    </div>
+                    <div class="kafelek-utworu">
+                        <img src="okladka1.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki</h4>
+                        <p>Artysta</p>
+                    </div>
+                    <div class="kafelek-utworu">
+                        <img src="okladka2.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki</h4>
+                        <p>Artysta</p>
+                    </div>
+                    <div class="kafelek-utworu">
+                        <img src="okladka3.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki</h4>
+                        <p>Artysta</p>
+                    </div>
+                    <div class="kafelek-utworu">
+                        <img src="okladka1.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki</h4>
+                        <p>Artysta</p>
+                    </div>
+                    <div class="kafelek-utworu">
+                        <img src="okladka2.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki</h4>
+                        <p>Artysta</p>
+                    </div>
+                    <div class="kafelek-utworu">
+                        <img src="okladka3.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki</h4>
+                        <p>Artysta</p>
+                    </div>
+                    <div class="kafelek-utworu">
+                        <img src="okladka1.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki</h4>
+                        <p>Artysta</p>
+                    </div>
+                    <div class="kafelek-utworu">
+                        <img src="okladka2.jpg" alt="Okładka">
+                        <h4>Tytuł Piosenki</h4>
+                        <p>Artysta</p>
+                    </div>
+                </div>
+            </div>
+            <div id="Ranking" class="widok">
+                <div class="rankingi-kontener">
+                    <div id="RankingSwiat">
+                        <h2>Ranking TOP 5 Piosenek worldwide</h2>
+                        <p>Tutaj znajdziesz ranking.</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Pozycja</th>
+                                    <th>Okładka</th>
+                                    <th>Tytuł</th>
+                                    <th>Artysta</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><img src="okladka1.jpg" alt="Okładka 1"></td>
+                                    <td>Babydoll</td>
+                                    <td>Dominic Fike</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td><img src="okladka2.jpg" alt="Okładka 2"></td>
+                                    <td>Risk it All</td>
+                                    <td>Bruno Mars</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td><img src="okladka3.jpg" alt="Okładka 3"></td>
+                                    <td>Tatuazyk</td>
+                                    <td>Sentino</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td><img src="okladka3.jpg" alt="Okładka 4"></td>
+                                    <td>Pistolet</td>
+                                    <td>Sentino</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td><img src="okladka3.jpg" alt="Okładka 5"></td>
+                                    <td>Pare Kulek</td>
+                                    <td>Sentino</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="RankingPolska">
+                        <h2>Ranking TOP 5 Piosenek w Polsce</h2>
+                        <p>Tutaj znajdziesz ranking.</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Pozycja</th>
+                                    <th>Okładka</th>
+                                    <th>Tytuł</th>
+                                    <th>Artysta</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><img src="okladka1.jpg" alt="Okładka 1"></td>
+                                    <td>Babydoll</td>
+                                    <td>Dominic Fike</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td><img src="okladka2.jpg" alt="Okładka 2"></td>
+                                    <td>Risk it All</td>
+                                    <td>Bruno Mars</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td><img src="okladka3.jpg" alt="Okładka 3"></td>
+                                    <td>Tatuazyk</td>
+                                    <td>Sentino</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td><img src="okladka3.jpg" alt="Okładka 4"></td>
+                                    <td>Pistolet</td>
+                                    <td>Sentino</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td><img src="okladka3.jpg" alt="Okładka 5"></td>
+                                    <td>Pare Kulek</td>
+                                    <td>Sentino</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
     </div>
 </body>
+
 </html>

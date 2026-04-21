@@ -1,45 +1,83 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: black;
+  color: white;
+  -webkit-text-stroke: 0.3px black;
+  margin: 0;
+}
+.glowna {
+  display: flex; 
+  min-height: 100vh;
+}
+.sidebar {
+  width: 250px; 
+  padding: 20px;
+  background-color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+}
+.glowna-tresc {
+  flex-grow: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(100% - 250px);
+  min-width: 0;
+  justify-content: center;
+}
 #Logo {
-  display: block;
-    text-align: center;
-    height: 200px;
+  text-align: center;
+  height: 150px;
+  margin-bottom: 20px;
+}
+#menu {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
 }
 .klasa {
-  background-color:grey;
+  background-color: #555555;
   padding: 20px;
-  text-align: center;
   border-radius: 10px;
   cursor: pointer;
-  margin-bottom: 30px;
-  font-family: Arial, sans-serif;
-  font-size: 2rem;
+  font-size: 1.5rem;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  display:flex;
+  display: flex;
   justify-content: flex-start;
+  box-sizing: border-box;
+  width: 100%;
 }
 .klasa:hover {
   background-color: #1DB954;
-  transform: scale(1.05);
+  transform: translateX(8px);
 }
-
 .klasa:active {
   transform: scale(0.95);
 }
-#StronaGlowna {
-    padding: 20px;
-    text-align: center;
-}
 .ukryty {
-    display:none;
+  display: none !important;
 }
 .widok {
   transition: opacity 0.3s ease-in-out;
   text-align: center;
+  width: 100%;
 }
-body {
-    font-family: Arial, sans-serif;
-    background-color:black;
-    color: white;
-    -webkit-text-stroke: 0.3px black;
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+td {
+  padding: 10px;
+}
+td > img {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+}
+#RankingSwiat, #RankingPolska {
+  margin-bottom: 40px;
 }
 .przycisk-powrot {
   padding: 10px 20px;
@@ -50,52 +88,177 @@ body {
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   transition: background-color 0.3s ease, transform 0.2s ease; 
 }
-
 .przycisk-powrot:hover {
   background-color: #1DB954;
   transform: scale(1.05);
 }
-
 .przycisk-powrot:active {
   transform: scale(0.95);
 }
-#menu {
+.rankingi-kontener {
   display: flex;
   justify-content: center;
-  width: 20%;
-  flex-direction: column;
+  gap: 60px;
+  width: 100%;
+  margin-top: 20px;
 }
-#RankingSwiat{
-  width: 40%;
+#RankingSwiat, #RankingPolska {
+  flex: 1;
+  max-width: 600px;
+}
+.wyszukiwarka-kontener {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
+  align-items: center;
+  width: 100%;
 }
-#RankingPolska{
-  width: 40%;
+.wyszukiwarka-kontener h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  -webkit-text-stroke: 0;
+}
+#formularz-wyszukiwania {
   display: flex;
-  flex-direction: column;
-  margin-left: 20px;
+  gap: 15px;
+  width: 100%;
+  max-width: 700px;
 }
-td>img{
-  width: 50px;
-  height: 50px;
+#szukanie {
+  flex-grow: 1;
+  padding: 15px 25px;
+  border-radius: 30px;
+  border: none;
+  font-size: 1.2rem;
+  background-color: #333333;
+  color: white;
+  outline: none;
+  transition: background-color 0.3s;
 }
-table {
-  margin: auto;
+#szukanie:focus {
+  background-color: #444444;
 }
-#kontener {
-  display: flex;
+#przycisk-szukaj {
+  padding: 15px 35px;
+  border-radius: 30px;
+  border: none;
+  background-color: #1DB954;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
-@media screen and (max-width: 320px) {
-  #kontener {
+#przycisk-szukaj:hover {
+  background-color: #1ed760;
+  transform: scale(1.05);
+}
+.kontener-powrotu {
+  text-align: center;
+  width: 100%;
+}
+#GlownyRankingSwiat > .kontener-powrotu {
+  text-align: center;
+  width: 100%;
+}
+#Nowosci > .kontener-powrotu {
+  text-align: center;
+  width: 100%;
+  margin-top: 40px;
+}
+.kafelek-utworu {
+    background-color: #282828;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: left;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.kafelek-utworu:hover {
+    background-color: #383838;
+}
+
+.kafelek-utworu img {
+    width: 100%; 
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.kafelek-utworu h4 {
+    margin: 0 0 5px 0;
+    font-size: 1rem;
+    -webkit-text-stroke: 0;
+}
+
+.kafelek-utworu p {
+    margin: 0;
+    color: #b3b3b3; 
+    font-size: 0.9rem;
+}
+
+.nowosci-karuzela {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto; 
+    padding-bottom: 30px; 
+}
+
+.nowosci-karuzela .kafelek-utworu {
+    flex: 0 0 400px; 
+    scroll-snap-align: start; 
+}
+.ulubione-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+.nowosci-karuzela {
+    scrollbar-width: thin; 
+    scrollbar-color: #555555 #1a1a1a; 
+}
+#Wyszukaj> .kontener-powrotu{
+  margin-top: 40px;
+}
+@media screen and (max-width: 750px) {
+  .rankingi-kontener {
     flex-direction: column;
     align-items: center;
   }
+  #StronaGlowna {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    padding: 10px 0px 0px 0px;
+  }
   #menu {
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  .klasa {
+    font-size: 1.1rem;
+    width: 100%;
+    padding: 15px;
+    justify-content: center;
+  }
+  .klasa:hover {
+    transform: translateY(-4px);
+  }
+  #formularz-wyszukiwania{
+    flex-direction: column;
+  }
+  .nowosci-karuzela .kafelek-utworu {
+    flex: 0 0 200px; 
+}
+  .glowna-tresc {
+    width: auto;
   }
 }

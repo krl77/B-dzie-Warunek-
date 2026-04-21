@@ -13,9 +13,17 @@ function pokazWidok(idWidokuDoPokazania) {
 
 const kafelekRanking = document.getElementById('KafelekRanking');
 const kafelekWyszukaj = document.getElementById('KafelekWyszukaj');
+const kafelekNowosci = document.getElementById('KafelekNowosci');
+const kafelekUlubione = document.getElementById('KafelekUlubione');
 
 kafelekRanking.addEventListener('click', () => {
-  pokazWidok('Ranking');
+  pokazWidok('GlownyRankingSwiat');
+});
+kafelekNowosci.addEventListener('click', () => {
+  pokazWidok('Nowosci');
+});
+kafelekUlubione.addEventListener('click', () => {
+  pokazWidok('Ulubione');
 });
 
 kafelekWyszukaj.addEventListener('click', () => {
@@ -26,7 +34,7 @@ const przyciskiPowrotu = document.querySelectorAll('.przycisk-powrot');
 przyciskiPowrotu.forEach(przycisk => {
   
   przycisk.addEventListener('click', () => {
-    pokazWidok('StronaGlowna'); 
+    pokazWidok('Ranking'); 
   });
   
 });

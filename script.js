@@ -1,5 +1,28 @@
-const clientId = "9901a837d97a4f758cdf064a80a9f9e8"
-const clientSecret = "d58128189d8742709054d0865ad2c62c"
+const clientId = "df8fb7f0c60d46a5ba2764efccca36b1"
+const clientSecret = "4496542c94324cc0959c163f77fdc3f1"
+
+function pobierzUlubione() {
+  const zapisane = localStorage.getItem("spotify_ulubione");
+  return zapisane ? JSON.parse(zapisane) : [];
+}
+
+function czyJestWUlubionych(tytul, tworca) {
+  const ulubione = pobierzUlubione();
+  return ulubione.some(u => u.tytul === tytul && u.tworca === tworca);
+}
+
+function toggleUlubione(zdjecie, tytul, tworca) {
+  let ulubione = pobierzUlubione();
+  const index = ulubione.findIndex(u => u.tytul === tytul && u.tworca === tworca);
+  
+  if (index === -1) {
+    ulubione.push({ zdjecie, tytul, tworca }); 
+  } else {
+    ulubione.splice(index, 1); 
+  }
+  
+  localStorage.setItem("spotify_ulubione", JSON.stringify(ulubione));
+}
 
 async function pobierzTokenMusicBrainz(){
 
@@ -28,40 +51,43 @@ async function pobierzTokenSpotify(){
   return dane.access_token;
 }
 
-async function pobierzTop50(token){
+async function pobierzTop50(token) {
   const headers = { "Authorization": "Bearer " + token };
-  
   const zapytania = [
     "https://api.spotify.com/v1/search?q=genre:pop&type=track&limit=10&offset=0&market=US",
     "https://api.spotify.com/v1/search?q=genre:pop&type=track&limit=10&offset=10&market=US",
     "https://api.spotify.com/v1/search?q=genre:pop&type=track&limit=10&offset=20&market=US",
     "https://api.spotify.com/v1/search?q=genre:pop&type=track&limit=10&offset=30&market=US",
-    "https://api.spotify.com/v1/search?q=genre:pop&type=track&limit=10&offset=40&market=US",
+    "https://api.spotify.com/v1/search?q=genre:pop&type=track&limit=10&offset=40&market=US"
   ];
 
   const obietnice = [];
   for (let i = 0; i < zapytania.length; i++) {
     obietnice.push(fetch(zapytania[i], { headers: headers }));
   }
+  
   const odpowiedzi = await Promise.all(obietnice);
 
   const dane = [];
   for (let i = 0; i < odpowiedzi.length; i++) {
     if (!odpowiedzi[i].ok) {
-      throw new Error("Blad API Spotify zapytanie " + (i+1) + " (" + odpowiedzi[i].status + ")")
+      throw new Error("Blad API Spotify zapytanie " + (i + 1) + " (" + odpowiedzi[i].status + ")");
     }
     const json = await odpowiedzi[i].json();
     dane.push(json);
   }
-
-  const wszystkiePiosenki = [];
+  let wszystkiePiosenkiRaw = [];
   for (let i = 0; i < dane.length; i++) {
     const piosenkiZListy = dane[i].tracks.items;
-    
     for (let j = 0; j < piosenkiZListy.length; j++) {
-      wszystkiePiosenki.push({track: piosenkiZListy[j]});
+      wszystkiePiosenkiRaw.push(piosenkiZListy[j]);
     }
   }
+  const wszystkiePiosenki = [];
+  for (let i = 0; i < wszystkiePiosenkiRaw.length; i++) {
+    wszystkiePiosenki.push({ track: wszystkiePiosenkiRaw[i] });
+  }
+
   return wszystkiePiosenki;
 }
 
@@ -112,7 +138,13 @@ function SzkieletAplikacji() {
 
   const logo = document.createElement("div");
   logo.id = "Logo";
-  logo.textContent = "Tutaj miejsce na logo";
+  
+  const imgLogo = document.createElement("img");
+  imgLogo.src = "logo.png"; 
+  imgLogo.alt = "Top Tier Tracking Logo";
+  imgLogo.className = "logo-strony";
+  
+  logo.append(imgLogo);
   sidebar.append(logo);
 
   const kontenerMenu = document.createElement("div");
@@ -229,7 +261,20 @@ function KafelekUtworu(kontener, zdjecie, tytul, tworca) {
   const p = document.createElement("p");
   p.textContent = tworca;
 
-  kafelek.append(img, h4, p);
+  const serduszko = document.createElement("button");
+  serduszko.className = "przycisk-ulubione";
+  serduszko.textContent = czyJestWUlubionych(tytul, tworca) ? "❤️" : "🤍";
+
+  serduszko.addEventListener("click", () => {
+    toggleUlubione(zdjecie, tytul, tworca);
+    serduszko.textContent = czyJestWUlubionych(tytul, tworca) ? "❤️" : "🤍";
+    
+    if (document.getElementById("Ulubione") && !czyJestWUlubionych(tytul, tworca)) {
+      przełączWidok("Ulubione");
+    }
+  });
+
+  kafelek.append(img, h4, p, serduszko);
   kontener.append(kafelek);
 }
 
@@ -332,7 +377,7 @@ async function Top50(rodzic) {
   }
 }
 
-function Nowosci(rodzic) {
+async function Nowosci(rodzic) {
   const widok = document.createElement("div");
   widok.id = "Nowosci";
   widok.className = "widok";
@@ -341,13 +386,37 @@ function Nowosci(rodzic) {
   h2.textContent = "Gorące Nowości";
 
   const karuzela = document.createElement("div");
-  karuzela.className = "nowosci-karuzela";
+  karuzela.className = "nowosci-karuzela"; 
 
   widok.append(h2, karuzela, PrzyciskPowrotu());
   rodzic.append(widok);
 
-  for (let i = 1; i < 11; i++) {
-    KafelekUtworu(karuzela, "okladka" + ((i % 3) + 1) + ".jpg", "Babydoll", "Dominic Fike");
+  karuzela.innerHTML = "<p style='text-align: center; color: white;'>Pobieranie polskich nowości ze Spotify...</p>";
+
+  try {
+    const token = await pobierzTokenSpotify();
+    const utwory = await pobierzNowosciZeSpotify(token);
+    
+    karuzela.innerHTML = "";
+
+    if (utwory.length === 0) {
+        karuzela.innerHTML = "<p style='color: white;'>Ups, nie znalazłem żadnych polskich nowości.</p>";
+        return;
+    }
+
+    utwory.forEach(utwor => {
+      const zdjecie = utwor.album.images.length > 0 
+                      ? utwor.album.images[1].url 
+                      : "https://via.placeholder.com/150"; 
+      const tytul = utwor.name;
+      const tworcy = utwor.artists.map(artysta => artysta.name).join(", "); 
+      
+      KafelekUtworu(karuzela, zdjecie, tytul, tworcy);
+    });
+
+  } catch (error) {
+    karuzela.innerHTML = "<p style='text-align: center; color: red;'>Wystąpił błąd podczas pobierania danych.</p>";
+    console.error("Błąd w nowościach:", error);
   }
 }
 
@@ -360,14 +429,24 @@ function Ulubione(rodzic) {
   h2.textContent = "Twoje Ulubione";
 
   const siatka = document.createElement("div");
-  siatka.className = "ulubione-grid";
+  siatka.className = "wyniki-grid"; 
+
+  const ulubione = pobierzUlubione();
+
+  if (ulubione.length === 0) {
+    const info = document.createElement("p");
+    info.textContent = "Nie masz jeszcze żadnych ulubionych piosenek. Znajdź coś w wyszukiwarce!";
+    info.style.color = "#b3b3b3";
+    info.style.gridColumn = "1 / -1";
+    siatka.append(info);
+  } else {
+    ulubione.forEach(utwor => {
+      KafelekUtworu(siatka, utwor.zdjecie, utwor.tytul, utwor.tworca);
+    });
+  }
 
   widok.append(h2, siatka, PrzyciskPowrotu());
   rodzic.append(widok);
-
-  for (let i = 1; i < 21; i++) {
-    KafelekUtworu(siatka, "okladka" + ((i % 3) + 1) + ".jpg", "Tytul", "Tworca");
-  }
 }
 
 function Wyszukaj(rodzic) {
@@ -402,14 +481,40 @@ function Wyszukaj(rodzic) {
   komunikatBledu.className = "blad-ukryty";
   komunikatBledu.textContent = "Musisz wpisać nazwę artysty!";
 
-  form.addEventListener("submit", (event) => {
-    event.preventDefault()
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
 
     if (input.value.trim() === "") {
-      komunikatBledu.className = "blad-widoczny"
+      komunikatBledu.className = "blad-widoczny";
     } else {
-      komunikatBledu.className = "blad-ukryty"
-      alert("Wyszukiwanie dla: " + input.value)
+      komunikatBledu.className = "blad-ukryty";
+      wynikiGrid.innerHTML = "<p style='grid-column: 1 / -1; text-align: center; color: white;'>Szukam utworów...</p>";
+
+      try {
+        const token = await pobierzTokenSpotify();
+        const utwory = await pobierzWynikiWyszukiwania(input.value, token);
+        
+        wynikiGrid.innerHTML = "";
+
+        if (utwory.length === 0) {
+          wynikiGrid.innerHTML = "<p style='grid-column: 1 / -1; text-align: center; color: white;'>Nic nie znaleziono dla tego zapytania.</p>";
+          return;
+        }
+
+        utwory.forEach(piosenka => {
+          const zdjecie = piosenka.album.images.length > 0 
+                          ? piosenka.album.images[1].url 
+                          : "https://via.placeholder.com/150"; 
+          const tytul = piosenka.name;
+          const tworcy = piosenka.artists.map(artysta => artysta.name).join(", "); 
+          
+          KafelekUtworu(wynikiGrid, zdjecie, tytul, tworcy);
+        });
+
+      } catch (error) {
+        wynikiGrid.innerHTML = "<p style='grid-column: 1 / -1; text-align: center; color: red;'>Wystąpił błąd podczas pobierania danych.</p>";
+        console.error(error);
+      }
     }
   });
 
@@ -422,6 +527,54 @@ function Wyszukaj(rodzic) {
   widok.append(kontenerWyszukiwarki, wynikiGrid, PrzyciskPowrotu());
   rodzic.append(widok);
 }
+async function pobierzWynikiWyszukiwania(zapytanie, token) {
+  const baza = "https://api.spotify.com/v1/search";
+  const parametry = "?q=" + encodeURIComponent(zapytanie) + "&type=track&limit=10";
+  const url = baza + parametry;
 
+  const odpowiedz = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + token
+    }
+  });
+
+  if (!odpowiedz.ok) {
+    const szczegolyBledu = await odpowiedz.json();
+    console.error("SPOTIFY ZWRÓCIŁO DOKŁADNY BŁĄD:", szczegolyBledu);
+    throw new Error(`Błąd wyszukiwania: ${odpowiedz.status}`);
+  }
+
+  const dane = await odpowiedz.json();
+  return dane.tracks.items; 
+}
+async function pobierzNowosciZeSpotify(token) {
+  const pobierzPaczke = async (fraza) => {
+    const url = new URL("https://api.spotify.com/v1/search");
+    url.searchParams.append("q", fraza); 
+    url.searchParams.append("type", "track");
+    url.searchParams.append("limit", "10"); 
+    url.searchParams.append("market", "PL"); 
+
+    const odpowiedz = await fetch(url.toString(), {
+      method: "GET",
+      headers: {
+        "Authorization": "Bearer " + token
+      }
+    });
+
+    if (!odpowiedz.ok) return []; 
+    const dane = await odpowiedz.json();
+    return dane.tracks.items;
+  };
+
+  const paczka1 = await pobierzPaczke("year:2026 a");
+  
+  const paczka2 = await pobierzPaczke("year:2026 o");
+
+  const polaczonePaczki = [...paczka1, ...paczka2];
+  
+  return polaczonePaczki; 
+}
 SzkieletAplikacji();
 przełączWidok("Ranking");

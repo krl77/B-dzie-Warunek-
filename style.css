@@ -27,9 +27,13 @@ body {
   justify-content: center;
 }
 #Logo {
-  text-align: center;
-  height: 150px;
-  margin-bottom: 20px;
+  text-align: center; 
+  padding: 20px 0;    
+}
+
+.logo-strony {
+  max-width: 80%; 
+  height: auto;   
 }
 #menu {
   display: flex;
@@ -264,4 +268,62 @@ td > img {
   .glowna-tresc {
     width: auto;
   }
+}
+.wyniki-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  width: 100%;
+  margin-top: 30px;
+}
+.kafelek-utworu {
+  background-color: #181818; 
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.kafelek-utworu:hover {
+  background-color: #282828; 
+  cursor: pointer;
+}
+
+.kafelek-utworu img {
+  width: 100%; 
+  height: auto; 
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5); 
+}
+
+.kafelek-utworu h4 {
+  color: #ffffff;
+  margin: 15px 0 5px 0;
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kafelek-utworu p {
+  color: #b3b3b3;
+  margin: 0;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.przycisk-ulubione {
+  background-color: transparent;
+  border: none; 
+  font-size: 24px; 
+  cursor: pointer; 
+  margin-top: 10px;
+  padding: 0; 
+  transition: transform 0.2s ease; 
+}
+
+.przycisk-ulubione:hover {
+  transform: scale(1.2); 
 }

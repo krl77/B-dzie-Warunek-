@@ -1,4 +1,4 @@
-# Top Tier Tracking 🎧
+# Top Tier Tracking 
 
 Nowoczesny i lekki panel muzyczny korzystający z oficjalnego API Spotify. Aplikacja została napisana od zera w czystym JavaScript (Vanilla JS), a cała struktura strony jest generowana dynamicznie w kodzie.
 
@@ -22,3 +22,19 @@ Aplikacja nie wymaga serwera. Działa bezpośrednio w przeglądarce!
 * **HTML5 & CSS3** (Flexbox, Grid, responsywny design)
 * **JavaScript ES6+** (async/await, fetch API, dynamiczne renderowanie DOM)
 * **LocalStorage API** (przechowywanie danych użytkownika)
+##  Zrzuty ekranu
+
+**Widok Głównego Rankingu:**
+![Widok Rankingu](img/ranking.png)
+
+**Zaawansowana Wyszukiwarka:**
+![Widok Wyszukiwarki](img/wyszukiwarka.png)
+
+**Karuzela Nowości:**
+![Widok Nowości](img/nowosci.png)
+
+**Strona Główna:**
+![Widok Strony Głównej](img/stron_glowna.png)
+
+**Ulubione:**
+![Widok Ulubione](img/ulubione.png)
